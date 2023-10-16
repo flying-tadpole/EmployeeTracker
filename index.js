@@ -1,7 +1,7 @@
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
 
-const { seeDepartments, seeEmployees, seeRoles, sqlAddDepart, sqlAddEmployee, sqlAddRole, sqlBudget, sqlUpdateManager } = require('./lib/queries');
+const { seeDepartments, seeEmployees, seeRoles, sqlAddDepart, sqlAddEmployee, sqlAddRole, sqlBudget, sqlUpdateManager, departList } = require('./lib/queries');
 
 const { mainMenu, addDepartment, addRole, addEmployee, updateEmployee } = require('./lib/userChoices')
 
@@ -18,15 +18,38 @@ const db = mysql.createConnection(
 
 const viewDepartmentsFunc = () => {
   console.log('viewing departments')
-  
+  db.query(seeDepartments, (err, results) => {
+    if (err) {
+      console.log('Sorry, unable to view the departments')
+    } else {
+      console.table(results)
+    }
+    init()
+  })
 }
 
 const viewRolesFunc = () => {
   console.log('viewing roles')
+  db.query(seeRoles, (err, results) => {
+    if (err) {
+      console.log('Sorry, unable to view roles')
+    } else {
+      console.table(results)
+    }
+    init()
+  })
 }
 
 const viewEmp = () => {
   console.log('viewing employees')
+  db.query(seeEmployees, (err, results) => {
+    if (err) {
+      console.log('Sorry, unable to view employees')
+    } else {
+      console.table(results)
+    }
+    init()
+  })
 }
 
 const addDepartmentFunc = () => {
@@ -38,8 +61,6 @@ const addDepartmentFunc = () => {
       db.query(sqlAddDepart, params, (err, results) => {
         if (err) {
           console.log('Sorry, unable to add department')
-        } else {
-          console.log('Department added')
         }
         init()
       })
