@@ -16,7 +16,7 @@ To run, start index.js file with node and follow command line prompts.
 
 [GitHub Repo Link:](https://github.com/flying-tadpole/EmployeeTracker)
 
-[Video Walkthrough Link:]()
+[Video Walkthrough Link:](https://www.youtube.com/watch?v=falMCGfuf_I)
 
 ## Credits
 
